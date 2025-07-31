@@ -1,5 +1,5 @@
 # 📖 Bible Bot - your best companion for Bible study on Discord!
----
+
 ## ⚙️ **Bot features:**
 
 - 📅 sending the verse of the day
