@@ -33,9 +33,9 @@
 3. Create a `.env` file
 
   ```env
-  TOKEN='token_bota'
-  INVITE_LINK='link_z_zaproszeniem'
-  SERVER_LINK='link_do_serwera_supportu'
+  TOKEN='bot_token'
+  INVITE_LINK='invite_link'
+  SERVER_LINK='support_server_link'
   ```
 
 4. Run the bot
