@@ -18,7 +18,7 @@ def create_embed(title: str, message: str, translation: str, verse_count: int) -
         color=STANDARD_COLOR
     )
 
-@app_commands.command(name="search", description="Searching passages in the Bible")
+@app_commands.command(name="search", description="Searches for passages containing a specific word or phrase")
 @app_commands.describe(text="Enter a word or phrase", translation="Select a Bible translation")
 @app_commands.autocomplete(translation=translation_autocomplete)
 async def search(interaction: discord.Interaction, text: str, translation: str = None):

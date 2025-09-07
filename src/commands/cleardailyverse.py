@@ -13,10 +13,12 @@ async def cleardailyverse(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
 
     user_id = interaction.user.id
-    user_data = get_dailyverse_settings(user_id)
+    guild_id = interaction.guild.id
 
-    if user_data:
-        delete_dailyverse_settings(user_id)
+    settings = get_dailyverse_settings(user_id, guild_id)
+
+    if settings:
+        delete_dailyverse_settings(user_id, guild_id)
 
         embed = discord.Embed(
             title="Deleted successfully",

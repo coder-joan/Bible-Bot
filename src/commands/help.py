@@ -22,20 +22,20 @@ async def help(interaction: discord.Interaction):
 
         f'List of commands:\n\n'
 
+         '- `/maps` - displays selected map\n'
+         '- `/random` - displays a random verse\n'
          '- `/dailyverse` - displays the verse of the day\n'
-         '- `/maps` - displays selected map from the Bible\n'
          '- `/passage` - displays a passage from the Bible\n'
-         '- `/search` - searches for passages in the Bible\n'
+         '- `/versions` - shows available Bible translations\n'
          '- `/setversion` - sets a default Bible translation\n'
          '- `/setdailyverse` - sets up daily verse automation\n'
+         '- `/invite` - allows you to add a bot to your server\n'
          '- `/mysettings` - displays the current user settings\n'
-         '- `/versions` - shows available Bible translations\n'
-         '- `/random` - displays a random verse from the Bible\n'
          '- `/information` - displays information about the bot\n'
-         '- `/invite` - provides an invitation link to the server\n'
          '- `/cleardailyverse` - deletes daily verse automation\n'
-         '- `/cleartranslation` - deletes the user-set translation\n'
-         '- `/compare` - compares a passage in different Bible translations\n\n'
+         '- `/cleartranslation` - deletes the default translation\n'
+         '- `/compare` - compares a passage in different Bible translations\n'
+         '- `/search` - searches for passages containing a specific word or phrase\n\n'
 
         'Have questions or suggestions? Use the `/support` command'
     ]

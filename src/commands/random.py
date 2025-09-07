@@ -10,7 +10,7 @@ from utils.autocomplete import translation_autocomplete
 from services.user_translation_db import get_user_settings
 from services.bibles_db import get_bible_connection, get_random_verse, get_following_verses
 
-@app_commands.command(name="random", description="Displays a random verse from the Bible")
+@app_commands.command(name="random", description="Displays a random verse")
 @app_commands.describe(translation="Select a Bible translation")
 @app_commands.autocomplete(translation=translation_autocomplete)
 async def random(interaction: discord.Interaction, translation: str = None):

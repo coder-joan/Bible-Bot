@@ -14,11 +14,12 @@ async def mysettings(interaction: discord.Interaction):
     translations = load_json(TRANSLATIONS)
 
     user_id = interaction.user.id
+    guild_id = interaction.guild.id
+
     user_data = get_user_settings(user_id)
-    dailyverse_data = get_dailyverse_settings(user_id)
+    dailyverse_data = get_dailyverse_settings(user_id, guild_id)
 
     translation = user_data[1] if user_data else "-"
-
     translation = translations.get(translation, translation)
 
     if dailyverse_data:

@@ -2,8 +2,9 @@ import discord, pytz
 
 from discord import app_commands
 from utils.autocomplete import timezone_autocomplete
-from config.colors import SUCCESS_COLOR, ERROR_COLOR
+from services.user_translation_db import get_user_settings
 from services.dailyverse_settings_db import set_dailyverse_settings
+from config.colors import SUCCESS_COLOR, ERROR_COLOR, STANDARD_COLOR
 
 @app_commands.command(name="setdailyverse", description="Sets up daily verse automation")
 @app_commands.describe(
@@ -25,6 +26,20 @@ async def setdailyverse(
     timezone: str
 ):
     await interaction.response.defer(ephemeral=True)
+
+    user_data = get_user_settings(interaction.user.id)
+
+    if not user_data or not user_data[1]:  
+        error_embed = discord.Embed(
+            title="Set a default Bible translation",
+            description=(
+                'Before you start searching for Bible passages, '
+                'set a default Bible translation using the `/setversion` command'
+            ),
+            color=STANDARD_COLOR
+        )
+        await interaction.followup.send(embed=error_embed, ephemeral=True)
+        return
 
     if hour < 1 or hour > 12:
         error_embed = discord.Embed(
@@ -48,7 +63,7 @@ async def setdailyverse(
     if period.value == "PM":
         hour_24 += 12
         
-    set_dailyverse_settings(interaction.user.id, channel.id, hour_24, timezone)
+    set_dailyverse_settings(interaction.user.id, interaction.guild.id, channel.id, hour_24, timezone)
 
     embed = discord.Embed(
         title="Daily verse automation enabled",

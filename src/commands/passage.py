@@ -1,9 +1,10 @@
 import discord, re
 
 from discord import app_commands
-from services.bibles_db import get_verses
 from config.paths import TRANSLATIONS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
+from services.bibles_db import get_verses
+from services.user_translation_db import get_user_settings
 from utils.load_json import load_json
 from utils.italic_font import italic_font
 from utils.autocomplete import translation_autocomplete, book_name_autocomplete
@@ -27,9 +28,12 @@ async def passage(
     book: str,
     chapter: int,
     verses: str,
-    translation: str
+    translation: str = None
 ):
     await interaction.response.defer()
+
+    user_id = interaction.user.id
+    user_data = get_user_settings(user_id)
 
     translations = load_json(TRANSLATIONS)
 
@@ -43,8 +47,24 @@ async def passage(
         )
         await interaction.followup.send(embed=error_embed)
         return
+    
+    if translation:
+        chosen_translation = translation
+    elif user_data:
+        chosen_translation = user_data[1]
+    else:
+        embed = discord.Embed(
+            title="Set a default Bible translation",
+            description=(
+                'Before you start searching for Bible passages, '
+                'set a default Bible translation using the `/setversion` command'
+            ),
+            color=STANDARD_COLOR
+        )
+        await interaction.followup.send(embed=embed)
+        return
 
-    if translation not in translations:
+    if chosen_translation not in translations:
         error_embed = discord.Embed(
             title="Error",
             description=(
@@ -70,7 +90,7 @@ async def passage(
     start_verse = int(match.group(1))
     end_verse = int(match.group(2)) if match.group(2) else start_verse
 
-    verse = get_verses(translation, book, chapter, start_verse, end_verse)
+    verse = get_verses(chosen_translation, book, chapter, start_verse, end_verse)
 
     passage = f"{book} {chapter}:{verses}"
 
@@ -103,5 +123,5 @@ async def passage(
         ),
         color=STANDARD_COLOR
     )
-    embed.set_footer(text=translations[translation])
+    embed.set_footer(text=translations[chosen_translation])
     await interaction.followup.send(embed=embed)

@@ -4,7 +4,7 @@ from discord import app_commands
 from config.paths import MAPS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 
-@app_commands.command(name="maps", description="Maps from the Bible")
+@app_commands.command(name="maps", description="Displays selected map")
 @app_commands.describe(map="Select a map")
 @app_commands.choices(map=[
     app_commands.Choice(name="Canaan in Old Testament Times", value="Canaan in Old Testament Times"),

@@ -4,7 +4,7 @@ from discord import app_commands
 from config.colors import SUCCESS_COLOR, ERROR_COLOR
 from services.user_translation_db import get_user_settings, remove_user_translation
 
-@app_commands.command(name="cleartranslation", description="Deletes the user-set translation")
+@app_commands.command(name="cleartranslation", description="Deletes the default translation")
 async def cleartranslation(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
 
@@ -16,7 +16,7 @@ async def cleartranslation(interaction: discord.Interaction):
 
         embed = discord.Embed(
             title="Deleted successfully",
-            description=("Your translation has been deleted"),
+            description=("Your default translation has been deleted"),
             color=SUCCESS_COLOR
         )
         await interaction.followup.send(embed=embed, ephemeral=True)

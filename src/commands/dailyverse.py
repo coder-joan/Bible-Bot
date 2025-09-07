@@ -32,10 +32,10 @@ async def dailyverse(
     books = load_json(ALTERNATIVE_BOOK_NAMES)
 
     user_id = interaction.user.id
+    guild_id = interaction.guild.id
 
-    user_settings = get_dailyverse_settings(user_id)
+    user_settings = get_dailyverse_settings(user_id, guild_id)
     channel_id, hour, timezone = (user_settings if user_settings else (None, None, None))
-
     user_data = get_user_settings(user_id)
 
     if translation:
@@ -67,9 +67,9 @@ async def dailyverse(
         return
 
     try:
-        response = requests.get("https://www.verseoftheday.com/")
+        response = requests.get("https://www.biblestudytools.com/bible-verse-of-the-day/")
         soup = BeautifulSoup(response.text, 'html.parser')
-        reference_div = soup.find("div", class_="reference")
+        reference_div = soup.find("div", class_="w-full mb-5")
         link = reference_div.find("a", href=True)
         verse_reference = link.text.strip()
 

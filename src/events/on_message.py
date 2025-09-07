@@ -1,12 +1,15 @@
 import discord
 
+from colorama import Fore, init
 from utils.load_json import load_json
 from utils.italic_font import italic_font
 from utils.get_passage import get_passage
 from utils.find_bible_references import find_bible_references
 from config.paths import TRANSLATIONS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
-from services.user_settings_db import get_user_settings
+from services.user_translation_db import get_user_settings
+
+init(autoreset=True)
 
 def setup_message_event(client):
     @client.event
@@ -37,7 +40,13 @@ def setup_message_event(client):
                 message.content = ' '.join(words[:-1])
 
         await client.process_commands(message)
-        await process_message_with_translation(message, translation)
+
+        try:
+            await process_message_with_translation(message, translation)
+        except discord.errors.Forbidden:
+            print(f"{Fore.RED}[X] Error sending message to channel {message.channel.id}: Missing Permissions")
+        except Exception as e:
+            print(f"{Fore.RED}[X] Unexpected error in on_message: {e}")
 
 async def process_message_with_translation(message, translation):
     bible_translations = load_json(TRANSLATIONS)
@@ -67,6 +76,7 @@ async def process_message_with_translation(message, translation):
 
             embed = discord.Embed(title=header, description=desc, color=STANDARD_COLOR)
             embed.set_footer(text=bible_translations.get(translation, translation))
+
             await message.channel.send(embed=embed)
             
         else:
