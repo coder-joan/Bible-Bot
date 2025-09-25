@@ -2,7 +2,7 @@ import discord, re
 
 from discord import app_commands
 from services.bibles_db import get_verses
-from config.paths import TRANSLATIONS
+from config.paths import TRANSLATIONS, BOOKS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from utils.load_json import load_json
 from utils.italic_font import italic_font
@@ -35,8 +35,9 @@ async def compare(
     await interaction.response.defer()
 
     translations = load_json(TRANSLATIONS)
+    book_names = load_json(BOOKS)
 
-    if book not in book:
+    if book not in book_names:
         error_embed = discord.Embed(
             title="Error",
             description=(
