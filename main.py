@@ -2,6 +2,9 @@ import discord, os
 
 from dotenv import load_dotenv
 from discord.ext import commands
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
+
 from src.events.on_ready import setup_ready_event
 from src.events.on_message import setup_message_event
 from src.events.on_guild_join import setup_guild_join_event
