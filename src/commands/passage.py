@@ -1,7 +1,7 @@
 import discord, re
 
 from discord import app_commands
-from config.paths import TRANSLATIONS
+from config.paths import TRANSLATIONS, BOOKS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from services.bibles_db import get_verses
 from services.user_translation_db import get_user_settings
@@ -36,8 +36,9 @@ async def passage(
     user_data = get_user_settings(user_id)
 
     translations = load_json(TRANSLATIONS)
+    book_names = load_json(BOOKS)
 
-    if book not in book:
+    if book not in book_names:
         error_embed = discord.Embed(
             title="Error",
             description=(
