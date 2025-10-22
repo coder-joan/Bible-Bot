@@ -1,6 +1,6 @@
 # 📖 Bible Bot - your best companion for Bible study on Discord!
 
-**Bible** is a bot designed to study the Word of God on Discord. Allows comparison of Bible translations in **16** languages
+**Bible** is a bot designed to study the Word of God on Discord. Bible translations are available in **16** different languages
 
 ---
 
