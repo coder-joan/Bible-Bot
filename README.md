@@ -33,9 +33,15 @@
 3. Create a `.env` file
 
   ```env
-  TOKEN='bot_token'
-  INVITE_LINK='invite_link'
-  SERVER_LINK='support_server_link'
+  BOT_TOKEN='your_bot_token'
+
+  WEBSITE_LINK='your_website'
+  INVITE_LINK='your_invite_link'
+  SERVER_LINK='your_server_link'
+  GITHUB_LINK='your_bot_project'
+
+  TOP_GG_LINK='optional_link'
+  DISCORD_BOT_LIST_LINK='optional_link'
   ```
 
 4. Run the bot
