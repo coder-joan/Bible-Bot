@@ -1,3 +1,2 @@
 .env
-/src/data/user_translation.db
-/src/data/dailyverse_settings.db
+/data
