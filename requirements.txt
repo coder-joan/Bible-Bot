@@ -1,6 +1,6 @@
-discord.py
 python-dotenv
-requests
-bs4
-pytz
+discord.py
 colorama
+requests
+psutil
+pytz
